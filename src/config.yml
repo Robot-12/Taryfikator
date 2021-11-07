@@ -1,0 +1,68 @@
+PedestrianTraffic:
+  name: " 1.Ruch pieszych"
+  months: [0,0]
+  mandate: [100,200]
+  nameOffense: ["1.1.Przechodzenie przez ulice w nieodpowiednim miejscu.","1.2.Chodzenie po ulicy lub w<br> miejscach nie odpowiednich do poruszania się pieszych"]
+
+VehicleMovement:
+  name: "2.Ruch pojazdów"
+  months: [ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ]
+  mandate: [ 200,300,500,400,350,300,300,300,200,500,300,500,400,500,500]
+  nameOffense: ["2.1 Zajmowanie więcej niż jednego, wyznaczonego na jezdni, pasa ruchu.","2.2 Zatrzymywanie pojazdu w miejscu nie przeznaczonym do tego.","2.3 Brawurowa jazda, driftowanie","2.4 Przekroczenie dopuszczalnej prędkości","2.5 Hamowanie w sposób powodujący zagrożenie bezpieczeństwa ruchu lub jego utrudnienie","2.6 Jazda z prędkością utrudniającą ruch innym kierującym","2.7 Niezachowanie bezpiecznej odległości pomiędzy pojazdami","2.8 Nieopowiednie skrecanie lub zawracanie","2.9 Nieprawidłowe wyprzedzanie","2.10 Przewóz osób w inny sposób niż to dozwolone (na kolanach itp.)","2.11 brak prawo jazdy","2.12 brak dokumentu potwierdzającego posiadanie pojazdu","2.13 Parkowanie w nieodpowiednim miejscu","2.14 Utrudnianie ruchu ulicznego przez złe parkowanie","2.15 Prowadzenie pojazdu pod wpływem substancji odużających lub alkocholu"]
+
+LightOffenses:
+  name: "3.Lekkie wykroczenia"
+  months: [ 0,0,0,0 ]
+  mandate: [ 200,200,300,500]
+  nameOffense: [ "3.1 Zakłócenie spokoju, porządku publicznego, spoczynku nocnego ","3.2 Umieszczenie w miejscu publicznym nieprzyzwoitego ogłoszenia,<br>napisu lub rysunku albo używanie słów nieprzyzwoitych","3.3 Brak dowodu osobistego","3.4 Niszczenie mienia publicznego" ]
+
+SeriousMisconduct:
+  name: "4. Ciężkie wykroczenia"
+  months: [ 5,10,6,5,5,5]
+  mandate: [ 1000,1500,1500,1000,1500,1000 ]
+  nameOffense: [ "4.1 Nękanie obywatela ","4.2 Porwanie obywatela","4.3 Rabunek obywatela","4.4 Ucieczka z miejsca zdarzenia","4.5 Kradzież pojazdu","4.6 Podszywanie się pod inne osoby." ]
+
+RelatedToTheMCPD:
+  name: "5. Związane z MCPD"
+  months: [ 0,0,0,0,5,0,10,10,0,7,5,300,0]
+  mandate: [ 500,300,500,600,1500,600,1000,1500,1000,2000,2000,30000,500]
+  nameOffense: ["5.1 Niewykonywanie poleceń FP","5.2 Obraza FP","5.3 Fałszywe zgłoszenie","5.4 Próba przekupstwa","5.5 Ucieczka przed policją","5.6 Prowokowanie Policji","5.7 Atak na FP","5.8 Porwanie FP","5.9 Utrudnianie pracy policji","5.10 Kradzież radiowozu lub ambulansu","5.11 Podszywanie się pod: Funkcjonariuszy policji, medyków, służb porządkowych, urzędników.","5.12 Korupcja","5.13 wtargniecie na teren pd"]
+
+Weapon:
+  name: "7. Broń"
+  months: [10,0,5,20,15,15]
+  mandate: [1500,750,1000,3000,2000,2000]
+  nameOffense: ["7.1 Posiadanie broni palnej krótkiej bez ważnej licencji ,konfiskata ","7.2 Posiadanie jakiejkolwiek broni białej na kodzie wyższym niż żółtym, konfiskata","7.3 Posiadanie jakiejkolwiek broni białej na kodzie czarnym, konfiskata","7.4 Posiadanie broni długiej, konfiskata","7.5 Dystrybucja jakiejkolwiek broni","7.6 Bezpodstawne postrzelenie osoby, zabranie licencji"]
+
+Seizures:
+  name: "8. Napady"
+  months: [15,20,15]
+  mandate: [2500,3500,1000]
+  nameOffense: ["8.1 Napad na stację benzynową","8.2 Napad na bank","8.3 Umyślne postrzelenie zakładnika"]
+
+Masks:
+  name: "9. Maski"
+  months: [ 0,0,0,0 ]
+  mandate: [ 0,400,500,750 ]
+  nameOffense: ["kod zielony /upomnienie","kod żółty /upomnienie jeśli nie zdejmie","kod czerwony /  przeszukanie jeśli może posiadać coś nielegalnego","kod czarny / przeszukanie"]
+
+Another:
+  name: "10. Inne"
+  months: [ 30,30,300 ]
+  mandate: [ 4000,5000,100000 ]
+  nameOffense: ["10.1 Udział w zorganizowanej grupie przestępczej","10.2 Terroryzm","10.3 Kierowanie zorganizowaną grupą przestępczą"]
+
+IllegalSubstances:
+  name: "6. nielegalne substancje"
+  above: 10
+  toMonths: [ 0,5 ]
+  toMandate: [ 500,750 ]
+  toNameOffense: ["6.2 Posiadanie lekkich narkotyków do","6.5 Posiadanie ciężkich narkotyków do"]
+  aboveMonths: [5,7]
+  aboveMandate: [1000,1250]
+  aboveNameOffense: [ "6.3 Posiadanie lekkich narkotyków powyżej","6.6 Posiadanie ciężkich narkotyków powyżej" ]
+  additionalMonths: [3,4]
+  additionalMandate: [500,750]
+  months: [ 5,10,15 ]
+  mandate: [ 1000,1000,2000 ]
+  nameOffense: ["6.7 Dystrybucja nielegalnych substancji","6.8 Produkcja narkotyków lekkich","6.9 Produkcja narkotyków ciękich"]

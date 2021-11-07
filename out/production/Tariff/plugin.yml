@@ -1,0 +1,12 @@
+main: pl.robot.tariff.Main
+name: Tariff
+version: 1.0
+author: Robot
+description: ucze się
+api-version: 1.12.2
+
+commands:
+  test:
+    description: "Moja piersza komeda"
+    aliases: [pk]
+    usage: "Nie poawnie użyłeś komendy"

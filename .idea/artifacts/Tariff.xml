@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Tariff">
+    <output-path>$PROJECT_DIR$/out/artifacts/Tariff</output-path>
+    <root id="archive" name="Tariff.jar">
+      <element id="module-output" name="Tariff" />
+    </root>
+  </artifact>
+</component>
