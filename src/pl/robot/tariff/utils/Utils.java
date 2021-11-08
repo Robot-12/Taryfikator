@@ -151,6 +151,7 @@ public class Utils {
                 {
                     if(entry.getValue().containsKey(p.getName()))
                     {
+                        p.sendMessage(entry.getKey());
                         if(entry.getKey() == "Posiadanie lekkich narkotyków"||entry.getKey()=="Posiadanie ciężkich narkotyków")
                         {
                             if(entry.getValue().get(p.getName()) > 0)
@@ -158,32 +159,36 @@ public class Utils {
                                 if(entry.getValue().get(p.getName())<= Main.plugin.getConfig().getInt("IllegalSubstances.above"))
                                 {
                                     p.sendMessage("2");
+                                    List<?> toNameOfes = Main.plugin.getConfig().getList("IllegalSubstances.toNameOffense");
                                     List<?> toMonths = Main.plugin.getConfig().getList("IllegalSubstances.toMonths");
                                     List<?> toMandate = Main.plugin.getConfig().getList("IllegalSubstances.toMandate");
+                                    String Madante = "";
+                                    String Months = "";
                                     if(entry.getKey() == "Posiadanie lekkich narkotyków")
                                     {
                                         p.sendMessage("3");
                                         if((Integer) toMonths.get(0)>0)
                                         {
-                                            lore.add(Utils.chat(entry.getKey() + "/" +mandateM.get(p.getName()) * Integer.parseInt(String.valueOf(entry.getValue().get(p.getName())))+"$ "+ monthsM.get(p.getName()) * Integer.parseInt(String.valueOf(entry.getValue().get(p.getName())))+"m "));
-                                            mapMonths.put(p.getName(), (Integer) toMonths.get(0));
+                                            Months = String.valueOf(toMonths.get(0));
                                         }
                                         if((Integer) toMandate.get(0)>0)
                                         {
                                             p.sendMessage("4");
-                                            mapMandate.put(p.getName(), (Integer) toMandate.get(0));
+                                            Madante = String.valueOf(toMandate.get(0));
                                         }
+                                        lore.add(Utils.chat(toNameOfes.get(0)+"/"+Madante+"$ "+Months+"m"));
                                     }
                                     else
                                     {
                                         if((Integer) toMonths.get(1)>0)
                                         {
-                                            mapMonths.put(p.getName(), (Integer) toMonths.get(1));
+                                            Months = String.valueOf(toMonths.get(1));
                                         }
                                         if((Integer) toMandate.get(1)>0)
                                         {
-                                            mapMandate.put(p.getName(), (Integer) toMandate.get(1));
+                                            Madante = String.valueOf(toMandate.get(1));
                                         }
+                                        lore.add(Utils.chat(toNameOfes.get(1)+"/"+Madante+"$ "+Months+"m"));
                                     }
                                 }
                                 else
@@ -193,6 +198,9 @@ public class Utils {
                                     List<?> toMandate = Main.plugin.getConfig().getList("IllegalSubstances.aboveMandate");
                                     List<?> additionalMonths = Main.plugin.getConfig().getList("IllegalSubstances.additionalMonths");
                                     List<?> additionalMandate = Main.plugin.getConfig().getList("IllegalSubstances.additionalMandate");
+                                    List<?> toNameOfes = Main.plugin.getConfig().getList("IllegalSubstances.aboveNameOffense");
+                                    String Madante = "";
+                                    String Months = "";
                                     int x = 0;
                                     if(entry.getKey() == "Posiadanie lekkich narkotyków")
                                     {
@@ -204,7 +212,7 @@ public class Utils {
                                                 x+= (Integer) additionalMonths.get(0);
                                             }
                                             x+=(Integer) toMonths.get(0);
-                                            mapMonths.put(p.getName(), x);
+                                            Months = String.valueOf(x);
                                         }
                                         if((Integer) toMandate.get(0)>0||(Integer) additionalMandate.get(0)>0)
                                         {
@@ -216,8 +224,9 @@ public class Utils {
                                                 x+= (Integer) additionalMandate.get(0);
                                             }
                                             x+=(Integer) toMandate.get(0);
-                                            mapMandate.put(p.getName(), x);
+                                            Months = String.valueOf(x);
                                         }
+                                        lore.add(Utils.chat(toNameOfes.get(1)+"/"+Madante+"$ "+Months+"m"));
                                     }
                                     else
                                     {
@@ -228,7 +237,7 @@ public class Utils {
                                                 x+= (Integer) additionalMonths.get(1);
                                             }
                                             x+=(Integer) toMonths.get(1);
-                                            mapMonths.put(p.getName(), x);
+                                            Months = String.valueOf(x);
                                         }
                                         if((Integer) toMandate.get(1)>0)
                                         {
@@ -238,8 +247,9 @@ public class Utils {
                                                 x+= (Integer) additionalMandate.get(1);
                                             }
                                             x+=(Integer) toMandate.get(1);
-                                            mapMandate.put(p.getName(), x);
+                                            Months = String.valueOf(x);
                                         }
+                                        lore.add(Utils.chat(toNameOfes.get(1)+"/"+Madante+"$ "+Months+"m"));
                                     }
                                 }
                             }

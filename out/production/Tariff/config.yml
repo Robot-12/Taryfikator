@@ -57,8 +57,10 @@ IllegalSubstances:
   above: 10
   toMonths: [ 0,5 ]
   toMandate: [ 500,750 ]
+  toNameOffense: ["6.2 Posiadanie lekkich narkotyków do","6.5 Posiadanie ciężkich narkotyków do"]
   aboveMonths: [5,7]
   aboveMandate: [1000,1250]
+  aboveNameOffense: [ "6.3 Posiadanie lekkich narkotyków powyżej","6.6 Posiadanie ciężkich narkotyków powyżej" ]
   additionalMonths: [3,4]
   additionalMandate: [500,750]
   months: [ 5,10,15 ]
