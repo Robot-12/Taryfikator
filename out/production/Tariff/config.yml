@@ -2,7 +2,7 @@ PedestrianTraffic:
   name: " 1.Ruch pieszych"
   months: [0,0]
   mandate: [100,200]
-  nameOffense: ["1.1.Przechodzenie przez ulice w nieodpowiednim miejscu.","1.2.Chodzenie po ulicy lub w<br> miejscach nie odpowiednich do poruszania się pieszych"]
+  nameOffense: ["1.1.Przechodzenie przez ulice<br> w nieodpowiednim miejscu.","1.2.Chodzenie po ulicy lub w<br> miejscach nie odpowiednich do poruszania się pieszych"]
 
 VehicleMovement:
   name: "2.Ruch pojazdów"

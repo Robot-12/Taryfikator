@@ -8,6 +8,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import pl.robot.tariff.Main;
+import pl.robot.tariff.calculator.CalculatorUI;
 import pl.robot.tariff.utils.Utils;
 import pl.robot.tariff.uiList.ListUI;
 
@@ -136,6 +137,10 @@ public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv)
             break;
         case "10.Inne":
             ListOffenses("Another",p);
+            break;
+        case "Miesionce/Pieniodze":
+            p.closeInventory();
+            p.openInventory(CalculatorUI.GUI(p));
             break;
         case "Restart":
             ItemMeta itemMeta = inv.getItem(40).getItemMeta();

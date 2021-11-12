@@ -6,9 +6,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.robot.tariff.calculator.CalculatorUI;
 import pl.robot.tariff.listeners.InventoryClickLisyner;
 import pl.robot.tariff.ui.TestUI;
 import pl.robot.tariff.uiAddRemove.AddRemoveUI;
+import pl.robot.tariff.uiAddRemoveCalculator.UiAddRemoveCalculator;
 
 import java.util.logging.Logger;
 
@@ -23,6 +25,8 @@ public class Main extends JavaPlugin implements CommandExecutor {
         new InventoryClickLisyner(this);
         TestUI.inttialize();
         AddRemoveUI.inttialize();
+        CalculatorUI.inttialize();
+        UiAddRemoveCalculator.inttialize();
         config.options().copyDefaults(true);
         saveConfig();
         plugin = this;
