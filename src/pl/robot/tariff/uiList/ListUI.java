@@ -25,6 +25,7 @@ public class ListUI  {
     public static Map<String, Map<String, Integer>> list= new HashMap<String, Map<String, Integer>>();
     public static Map<String, Map<String, Integer>> listMonths= new HashMap<String, Map<String, Integer>>();
     public static Map<String, Map<String, Integer>> listMandate= new HashMap<String, Map<String, Integer>>();
+    public static Map<String, Map<String, String>> listName= new HashMap<String, Map<String, String>>();
 
     //public static Map<String, Integer> innerMap = new HashMap<String, Integer>();
 
@@ -92,10 +93,8 @@ public class ListUI  {
             return;
         }
         String name = clicked.getItemMeta().getDisplayName();
-        p.sendMessage(name);
         List<?> nameOfset = Main.plugin.getConfig().getList("PedestrianTraffic.nameOffense");
         p.closeInventory();
-        p.sendMessage(String.valueOf(list));
         String itemMetaName =ChatColor.stripColor(clicked.getItemMeta().getDisplayName());
         if(list.get(itemMetaName)==null||list.get(itemMetaName).get(p.getName())==null)
         {
@@ -139,6 +138,20 @@ public class ListUI  {
                 listMandate.put(itemMetaName,newMap);
             }
         }
+        if(listName.get(itemMetaName)==null||listName.get(itemMetaName).get(p.getName())==null)
+        {
+            if(listName.get(itemMetaName)==null){
+                Map<String, String> newMap = new HashMap<String, String>();
+                newMap.put(p.getName(), "");
+                listName.put(itemMetaName,newMap);
+            }
+            else
+            {
+                Map<String, String> newMap = listName.get(itemMetaName);
+                newMap.put(p.getName(), "");
+                listName.put(itemMetaName,newMap);
+            }
+        }
         p.openInventory(AddRemoveUI.GUI(p,clicked.getItemMeta().getLocalizedName(), slot,clicked.getItemMeta().getDisplayName()));
 //        Block b = p.getWorld().getBlockAt(p.getLocation());
 //        b.setTypeId(63);
@@ -150,7 +163,6 @@ public class ListUI  {
 //            ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
 //
 //        }
-//        p.sendMessage(String.valueOf(nameOfset.size()));
         for(int i = 0;i <=nameOfset.size();i++)
         {
             String name0 = (String) nameOfset.get(i);

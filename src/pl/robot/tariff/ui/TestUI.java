@@ -32,7 +32,6 @@ public static Inventory GUI (Player p){
     String months = "0";
     Map<String, Integer> madateM = new HashMap<String, Integer>();
     Map<String, Integer> monthsM = new HashMap<String, Integer>();
-    p.sendMessage(String.valueOf(ListUI.list));
     if(ListUI.list.size()>0)
     {
         for (Map.Entry<String, Map<String, Integer>> entry : ListUI.list.entrySet()) {
@@ -67,7 +66,7 @@ public static Inventory GUI (Player p){
 
     Utils.createItem(inv, 426,1,  23,"Miesionce/Pieniodze", "");
     Utils.createItemStats(inv, 340,1,  41,months,mandate,monthsM,madateM,p,"");
-    Utils.createItem(inv, 386,1,  59,"Pokasz Wynik", "");
+    Utils.createItemMeta(inv, 386,1,  59,"Pokasz Wynik", mandate+","+months,"");
     Utils.createItemByte(inv, 160,14,1,  77,"&cRestart", "");
 
 
@@ -161,17 +160,47 @@ public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv)
                     entry.getValue().remove(p.getName());
                 }
             }
+            for (Map.Entry<String, Map<String, String>> entry : ListUI.listName.entrySet())
+            {
+                if(entry.getValue().get(p.getName())!=null)
+                {
+                    entry.getValue().remove(p.getName());
+                }
+            }
             break;
         case "Pokasz Wynik":
+            ArrayList<String> array = new ArrayList<String>(Arrays.asList(clicked.getItemMeta().getLocalizedName().split(",")));
             for(Entity en : p.getWorld().getEntities()) {
                 if(en instanceof Player) {
                     Player player = (Player) en;
                     double distance = player.getLocation().distance(p.getLocation());
-                    if(distance < 20) {
-                        for(int i = 0;i<inv.getItem(40).getItemMeta().getLore().size()-1;i++)
-                        {
-                            player.sendMessage(Utils.chat("&5"+String.valueOf(inv.getItem(40).getItemMeta().getLore().get(i))));
-                        }
+                    if(distance < 10) {
+                            for (Map.Entry<String, Map<String, String>> entry : ListUI.listName.entrySet()) {
+                                if(entry.getValue().get(p.getName()) != null)
+                                {
+                                    player.sendMessage(Utils.chat("&5"+entry.getValue().get(p.getName())));
+                                }
+                            }
+                            if(Integer.parseInt(array.get(0))>0||Integer.parseInt(array.get(1))>0)
+                            {
+                                if(inv.getItem(40).getItemMeta().getLore().size()>1)
+                                {
+                                    player.sendMessage(Utils.chat("&5"+"Suma:"));
+                                    if(Integer.parseInt(array.get(0))>0)
+                                    {
+                                        player.sendMessage(Utils.chat("&5"+inv.getItem(40).getItemMeta().getLore().get(0)));
+                                    }
+                                    if(Integer.parseInt(array.get(1))>0)
+                                    {
+                                        player.sendMessage(Utils.chat("&5"+inv.getItem(40).getItemMeta().getLore().get(1)));
+                                    }
+                                    player.sendMessage(Utils.chat("&5(("+p.getName()+"))"));
+                                }
+                            }
+//                        for(int i = 0;i<inv.getItem(40).getItemMeta().getLore().size()-1;i++)
+//                        {
+//                            player.sendMessage(Utils.chat("&5"+String.valueOf(inv.getItem(40).getItemMeta().getLore().get(i))));
+//                        }
                     }
                 }
             }

@@ -110,7 +110,6 @@ public class AddRemoveUI  {
                         }
                         if((Integer) toMandate.get(0)>0)
                         {
-                            p.sendMessage("Test4");
                             description = "&3Mandat: "+(Integer) toMandate.get(0);
                             mandateMeta = String.valueOf(toMandate.get(0));
                         }
@@ -233,24 +232,20 @@ public class AddRemoveUI  {
         }
         if(inventory_name == "Posiadanie lekkich narkotyków"||inventory_name=="Posiadanie ciężkich narkotyków")
         {
-            p.sendMessage("1");
             if(Valiu > 0)
                 {
                     if(Valiu<=Main.plugin.getConfig().getInt(OffensesName+".above"))
                     {
-                        p.sendMessage("2");
                         List<?> toMonths = Main.plugin.getConfig().getList(OffensesName+".toMonths");
                         List<?> toMandate = Main.plugin.getConfig().getList(OffensesName+".toMandate");
                         if(inventory_name == "Posiadanie lekkich narkotyków")
                         {
-                            p.sendMessage("3");
                             if((Integer) toMonths.get(0)>0)
                             {
                                 lore.add(Utils.chat("&3Mieśionce: "+ (Integer) toMonths.get(0)));
                             }
                             if((Integer) toMandate.get(0)>0)
                             {
-                                p.sendMessage("4");
                                 lore.add(Utils.chat("&3Mandat: "+ (Integer) toMandate.get(0)));
                             }
                         }
@@ -268,7 +263,6 @@ public class AddRemoveUI  {
                     }
                     else
                     {
-                        p.sendMessage("5");
                         List<?> toMonths = Main.plugin.getConfig().getList(OffensesName+".aboveMonths");
                         List<?> toMandate = Main.plugin.getConfig().getList(OffensesName+".aboveMandate");
                         List<?> additionalMonths = Main.plugin.getConfig().getList(OffensesName+".additionalMonths");
@@ -276,7 +270,6 @@ public class AddRemoveUI  {
                         int x = 0;
                         if(inventory_name == "Posiadanie lekkich narkotyków")
                         {
-                            p.sendMessage("6");
                             if((Integer) toMonths.get(0)>0||(Integer) additionalMonths.get(0)>0)
                             {
                                 for(int ii = 2; ii<=Valiu/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
@@ -288,11 +281,9 @@ public class AddRemoveUI  {
                             }
                             if((Integer) toMandate.get(0)>0||(Integer) additionalMandate.get(0)>0)
                             {
-                                p.sendMessage("7");
                                 x =0;
                                 for(int ii = 2; ii<=Valiu/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
                                 {
-                                    p.sendMessage("8"+ii);
                                     x+= (Integer) additionalMandate.get(0);
                                 }
                                 x+=(Integer) toMandate.get(0);
@@ -347,6 +338,7 @@ public class AddRemoveUI  {
         Map<String, Integer> map = ListUI.list.get(inv.getItem(13).getItemMeta().getLocalizedName());
         Map<String, Integer> mapMonths = ListUI.listMonths.get(inv.getItem(13).getItemMeta().getLocalizedName());
         Map<String, Integer> mapMandate = ListUI.listMandate.get(inv.getItem(13).getItemMeta().getLocalizedName());
+        Map<String, String> mapName = ListUI.listName.get(inv.getItem(13).getItemMeta().getLocalizedName());
         int months = Integer.parseInt(new ArrayList<String>(Arrays.asList(inv.getItem(12).getItemMeta().getLocalizedName().split(","))).get(0));
         int mandate = Integer.parseInt(new ArrayList<String>(Arrays.asList(inv.getItem(12).getItemMeta().getLocalizedName().split(","))).get(1));
         String name = clicked.getItemMeta().getDisplayName();
@@ -381,113 +373,142 @@ public class AddRemoveUI  {
                 p.openInventory(ListUI.GUI(p,clicked.getItemMeta().getLocalizedName()));
                 break;
             case "Potwierdz":
-                if(inv.getItem(13).getItemMeta().getLocalizedName() == "Posiadanie lekkich narkotyków"||inv.getItem(13).getItemMeta().getLocalizedName() == "Posiadanie ciężkich narkotyków")
+                if(Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))>0)
                 {
-                    map.put(p.getName(), Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName())));
-                    String OffensesName = inv.getItem(35).getItemMeta().getLocalizedName();
-                    p.sendMessage(OffensesName);
-                    p.sendMessage(String.valueOf(Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))));
-                    p.sendMessage(String.valueOf(Main.plugin.getConfig().getInt(OffensesName+".above")));
-                    p.sendMessage("1");
-                    String inventory_name = inv.getItem(13).getItemMeta().getLocalizedName();
-                    if(Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName())) > 0)
+                    List<?> nameOfset = Main.plugin.getConfig().getList(clicked.getItemMeta().getLocalizedName()+".nameOffense");
+                    if(inv.getItem(13).getItemMeta().getLocalizedName() == "Posiadanie lekkich narkotyków"||inv.getItem(13).getItemMeta().getLocalizedName() == "Posiadanie ciężkich narkotyków")
                     {
-                        if(Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))<=Main.plugin.getConfig().getInt(OffensesName+".above"))
+                        map.put(p.getName(), Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName())));
+                        String OffensesName = inv.getItem(35).getItemMeta().getLocalizedName();
+                        String inventory_name = inv.getItem(13).getItemMeta().getLocalizedName();
+                        if(Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName())) > 0)
                         {
-                            p.sendMessage("2");
-                            List<?> toMonths = Main.plugin.getConfig().getList(OffensesName+".toMonths");
-                            List<?> toMandate = Main.plugin.getConfig().getList(OffensesName+".toMandate");
-                            if(inventory_name == "Posiadanie lekkich narkotyków")
+                            if(Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))<=Main.plugin.getConfig().getInt(OffensesName+".above"))
                             {
-                                p.sendMessage("3");
-                                if((Integer) toMonths.get(0)>0)
+                                List<?> toMonths = Main.plugin.getConfig().getList(OffensesName+".toMonths");
+                                List<?> toMandate = Main.plugin.getConfig().getList(OffensesName+".toMandate");
+                                List<?> toNameOfes = Main.plugin.getConfig().getList(OffensesName+".toNameOffense");
+                                if(inventory_name == "Posiadanie lekkich narkotyków")
                                 {
-                                    mapMonths.put(p.getName(), (Integer) toMonths.get(0));
+                                    if((Integer) toMonths.get(0)>0)
+                                    {
+                                        mapMonths.put(p.getName(), (Integer) toMonths.get(0));
+                                    }
+                                    if((Integer) toMandate.get(0)>0)
+                                    {
+                                        mapMandate.put(p.getName(), (Integer) toMandate.get(0));
+                                    }
+                                    mapName.put(p.getName(), toNameOfes.get(0)+" "+Main.plugin.getConfig().getInt(OffensesName+".above")+"g "+"/"+mapMandate.get(p.getName())+"$ "+mapMonths.get(p.getName())+"m");
                                 }
-                                if((Integer) toMandate.get(0)>0)
+                                else
                                 {
-                                    p.sendMessage("4");
-                                    mapMandate.put(p.getName(), (Integer) toMandate.get(0));
+                                    if((Integer) toMonths.get(1)>0)
+                                    {
+                                        mapMonths.put(p.getName(), (Integer) toMonths.get(1));
+                                    }
+                                    if((Integer) toMandate.get(1)>0)
+                                    {
+                                        mapMandate.put(p.getName(), (Integer) toMandate.get(1));
+                                    }
+                                    mapName.put(p.getName(), toNameOfes.get(1)+" "+Main.plugin.getConfig().getInt(OffensesName+".above")+"g "+"/"+mapMandate.get(p.getName())+"$ "+mapMonths.get(p.getName())+"m");
                                 }
                             }
                             else
                             {
-                                if((Integer) toMonths.get(1)>0)
+                                List<?> toMonths = Main.plugin.getConfig().getList(OffensesName+".aboveMonths");
+                                List<?> toMandate = Main.plugin.getConfig().getList(OffensesName+".aboveMandate");
+                                List<?> additionalMonths = Main.plugin.getConfig().getList(OffensesName+".additionalMonths");
+                                List<?> additionalMandate = Main.plugin.getConfig().getList(OffensesName+".additionalMandate");
+                                List<?> additionalName = Main.plugin.getConfig().getList(OffensesName+".aboveNameOffense");
+                                int x = 0;
+                                int montD = 0;
+                                int mandD=0;
+                                if(inventory_name == "Posiadanie lekkich narkotyków")
                                 {
-                                    mapMonths.put(p.getName(), (Integer) toMonths.get(1));
-                                }
-                                if((Integer) toMandate.get(1)>0)
-                                {
-                                    mapMandate.put(p.getName(), (Integer) toMandate.get(1));
-                                }
-                            }
-                        }
-                        else
-                        {
-                            p.sendMessage("5");
-                            List<?> toMonths = Main.plugin.getConfig().getList(OffensesName+".aboveMonths");
-                            List<?> toMandate = Main.plugin.getConfig().getList(OffensesName+".aboveMandate");
-                            List<?> additionalMonths = Main.plugin.getConfig().getList(OffensesName+".additionalMonths");
-                            List<?> additionalMandate = Main.plugin.getConfig().getList(OffensesName+".additionalMandate");
-                            int x = 0;
-                            if(inventory_name == "Posiadanie lekkich narkotyków")
-                            {
-                                p.sendMessage("6");
-                                if((Integer) toMonths.get(0)>0||(Integer) additionalMonths.get(0)>0)
-                                {
-                                    for(int ii = 2; ii<=Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                    if((Integer) toMonths.get(0)>0||(Integer) additionalMonths.get(0)>0)
                                     {
-                                        x+= (Integer) additionalMonths.get(0);
+                                        for(int ii = 2; ii<=Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                        {
+                                            x+= (Integer) additionalMonths.get(0);
+                                        }
+                                        montD = x;
+                                        x+=(Integer) toMonths.get(0);
+                                        mapMonths.put(p.getName(), x);
                                     }
-                                    x+=(Integer) toMonths.get(0);
-                                    mapMonths.put(p.getName(), x);
-                                }
-                                if((Integer) toMandate.get(0)>0||(Integer) additionalMandate.get(0)>0)
-                                {
-                                    p.sendMessage("7");
-                                    x =0;
-                                    for(int ii = 2; ii<=Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                    if((Integer) toMandate.get(0)>0||(Integer) additionalMandate.get(0)>0)
                                     {
-                                        p.sendMessage("8"+ii);
-                                        x+= (Integer) additionalMandate.get(0);
+                                        x =0;
+                                        for(int ii = 2; ii<=Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                        {
+                                            x+= (Integer) additionalMandate.get(0);
+                                        }
+                                        mandD = x;
+                                        x+=(Integer) toMandate.get(0);
+                                        mapMandate.put(p.getName(), x);
                                     }
-                                    x+=(Integer) toMandate.get(0);
-                                    mapMandate.put(p.getName(), x);
-                                }
-                            }
-                            else
-                            {
-                                if((Integer) toMonths.get(1)>0)
-                                {
-                                    for(int ii = 2; ii<=Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                    if(montD <= 0|| mandD <=0)
                                     {
-                                        x+= (Integer) additionalMonths.get(1);
+                                        mapName.put(p.getName(), additionalName.get(0)+" "+Main.plugin.getConfig().getInt(OffensesName+".above")+"g "+"/"+mapMandate.get(p.getName())+"$ "+mapMonths.get(p.getName())+"m");
                                     }
-                                    x+=(Integer) toMonths.get(1);
-                                    mapMonths.put(p.getName(), x);
-                                }
-                                if((Integer) toMandate.get(1)>0)
-                                {
-                                    x =0;
-                                    for(int ii = 2; ii<=Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                    else
                                     {
-                                        x+= (Integer) additionalMandate.get(1);
+                                        mapName.put(p.getName(), additionalName.get(0)+" "+Main.plugin.getConfig().getInt(OffensesName+".above")+"g "+"/"+(mapMandate.get(p.getName())-mandD)+"$ "+(mapMonths.get(p.getName())-montD)+"m "+"Każdy kolejne "+Main.plugin.getConfig().getInt(OffensesName+".above")+"g /"+mandD+"$ "+montD+"m");
                                     }
-                                    x+=(Integer) toMandate.get(1);
-                                    mapMandate.put(p.getName(), x);
+                                }
+                                else
+                                {
+                                    if((Integer) toMonths.get(1)>0)
+                                    {
+                                        for(int ii = 2; ii<=Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                        {
+                                            x+= (Integer) additionalMonths.get(1);
+                                        }
+                                        montD = x;
+                                        x+=(Integer) toMonths.get(1);
+                                        mapMonths.put(p.getName(), x);
+                                    }
+                                    if((Integer) toMandate.get(1)>0)
+                                    {
+                                        x =0;
+                                        for(int ii = 2; ii<=Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                        {
+                                            x+= (Integer) additionalMandate.get(1);
+                                        }
+                                        mandD = x;
+                                        x+=(Integer) toMandate.get(1);
+                                        mapMandate.put(p.getName(), x);
+                                    }
+                                    if(montD <= 0|| mandD <=0)
+                                    {
+                                        mapName.put(p.getName(), additionalName.get(1)+" "+Main.plugin.getConfig().getInt(OffensesName+".above")+"g "+"/"+mapMandate.get(p.getName())+"$ "+mapMonths.get(p.getName())+"m");
+                                    }
+                                    else
+                                    {
+                                        mapName.put(p.getName(), additionalName.get(1)+" "+Main.plugin.getConfig().getInt(OffensesName+".above")+"g "+"/"+(mapMandate.get(p.getName())-mandD)+"$ "+(mapMonths.get(p.getName())-montD)+"m "+"Każdy kolejne "+Main.plugin.getConfig().getInt(OffensesName+".above")+"g /"+mandD+"$ "+montD+"m");
+                                    }
                                 }
                             }
                         }
                     }
+                    else
+                    {
+                        map.put(p.getName(), Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName())));
+                        mapMonths.put(p.getName(), Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))*months);
+                        mapMandate.put(p.getName(), Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))*mandate);
+                        mapName.put(p.getName(), ChatColor.stripColor(new ArrayList<String>(Arrays.asList(inv.getName().split("\\.\\.\\."))).get(0))+"/"+mapMandate.get(p.getName())+"$ "+mapMonths.get(p.getName())+"m");
+                    }
+                    p.closeInventory();
+                    p.openInventory(ListUI.GUI(p,clicked.getItemMeta().getLocalizedName()));
                 }
                 else
                 {
-                    map.put(p.getName(), Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName())));
-                    mapMonths.put(p.getName(), Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))*months);
-                    mapMandate.put(p.getName(), Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))*mandate);
+                    map.remove(p.getName());
+                    mapMonths.remove(p.getName());
+                    mapMandate.remove(p.getName());
+                    mapName.remove(p.getName());
+                    p.closeInventory();
+                    p.openInventory(ListUI.GUI(p,clicked.getItemMeta().getLocalizedName()));
                 }
-                p.closeInventory();
-                p.openInventory(ListUI.GUI(p,clicked.getItemMeta().getLocalizedName()));
                 break;
             default:
                 p.sendMessage("Kliknełes coś co nie zostało doane jeszczsze");

@@ -41,7 +41,7 @@ public class Utils {
         return item;
     }
 
-    public static ItemStack createItemMeta(Inventory inv, int materialId, int amount, int invSlot, String displayName,String OffensesName, String... loreString){
+    public static ItemStack createItemMeta(Inventory inv, int materialId, int amount, int invSlot, String displayName,String MetaName, String... loreString){
 
         ItemStack item;
         List<String> lore = new ArrayList();
@@ -49,7 +49,7 @@ public class Utils {
         item = new ItemStack(Material.getMaterial(materialId), amount);
 
         ItemMeta meta = (ItemMeta) item.getItemMeta();
-        meta.setLocalizedName(OffensesName);
+        meta.setLocalizedName(MetaName);
         meta.setDisplayName(Utils.chat(displayName));
         for (String s : loreString) {
             lore.add(Utils.chat(s));
@@ -146,118 +146,12 @@ public class Utils {
             {
                 lore.add(Utils.chat("Miesiące: "+monthsS));
             }
-            for (Map.Entry<String, Map<String, Integer>> entry : ListUI.list.entrySet()) {
+            for (Map.Entry<String, Map<String, String>> entry : ListUI.listName.entrySet()) {
                 if(monthsM.get(p.getName()) != 0||mandateM.get(p.getName()) != 0)
                 {
-                    if(entry.getValue().containsKey(p.getName()))
+                    if(entry.getValue().get(p.getName()) != null)
                     {
-                        p.sendMessage(entry.getKey());
-                        if(entry.getKey() == "Posiadanie lekkich narkotyków"||entry.getKey()=="Posiadanie ciężkich narkotyków")
-                        {
-                            if(entry.getValue().get(p.getName()) > 0)
-                            {
-                                if(entry.getValue().get(p.getName())<= Main.plugin.getConfig().getInt("IllegalSubstances.above"))
-                                {
-                                    p.sendMessage("2");
-                                    List<?> toNameOfes = Main.plugin.getConfig().getList("IllegalSubstances.toNameOffense");
-                                    List<?> toMonths = Main.plugin.getConfig().getList("IllegalSubstances.toMonths");
-                                    List<?> toMandate = Main.plugin.getConfig().getList("IllegalSubstances.toMandate");
-                                    String Madante = "";
-                                    String Months = "";
-                                    if(entry.getKey() == "Posiadanie lekkich narkotyków")
-                                    {
-                                        p.sendMessage("3");
-                                        if((Integer) toMonths.get(0)>0)
-                                        {
-                                            Months = String.valueOf(toMonths.get(0));
-                                        }
-                                        if((Integer) toMandate.get(0)>0)
-                                        {
-                                            p.sendMessage("4");
-                                            Madante = String.valueOf(toMandate.get(0));
-                                        }
-                                        lore.add(Utils.chat(toNameOfes.get(0)+"/"+Madante+"$ "+Months+"m"));
-                                    }
-                                    else
-                                    {
-                                        if((Integer) toMonths.get(1)>0)
-                                        {
-                                            Months = String.valueOf(toMonths.get(1));
-                                        }
-                                        if((Integer) toMandate.get(1)>0)
-                                        {
-                                            Madante = String.valueOf(toMandate.get(1));
-                                        }
-                                        lore.add(Utils.chat(toNameOfes.get(1)+"/"+Madante+"$ "+Months+"m"));
-                                    }
-                                }
-                                else
-                                {
-                                    p.sendMessage("5");
-                                    List<?> toMonths = Main.plugin.getConfig().getList("IllegalSubstances.aboveMonths");
-                                    List<?> toMandate = Main.plugin.getConfig().getList("IllegalSubstances.aboveMandate");
-                                    List<?> additionalMonths = Main.plugin.getConfig().getList("IllegalSubstances.additionalMonths");
-                                    List<?> additionalMandate = Main.plugin.getConfig().getList("IllegalSubstances.additionalMandate");
-                                    List<?> toNameOfes = Main.plugin.getConfig().getList("IllegalSubstances.aboveNameOffense");
-                                    String Madante = "";
-                                    String Months = "";
-                                    int x = 0;
-                                    if(entry.getKey() == "Posiadanie lekkich narkotyków")
-                                    {
-                                        p.sendMessage("6");
-                                        if((Integer) toMonths.get(0)>0||(Integer) additionalMonths.get(0)>0)
-                                        {
-                                            for(int ii = 2; ii<=entry.getValue().get(p.getName())/Main.plugin.getConfig().getInt("IllegalSubstances.above"); ii++)
-                                            {
-                                                x+= (Integer) additionalMonths.get(0);
-                                            }
-                                            x+=(Integer) toMonths.get(0);
-                                            Months = String.valueOf(x);
-                                        }
-                                        if((Integer) toMandate.get(0)>0||(Integer) additionalMandate.get(0)>0)
-                                        {
-                                            p.sendMessage("7");
-                                            x =0;
-                                            for(int ii = 2; ii<=entry.getValue().get(p.getName())/Main.plugin.getConfig().getInt("IllegalSubstances.above"); ii++)
-                                            {
-                                                p.sendMessage("8"+ii);
-                                                x+= (Integer) additionalMandate.get(0);
-                                            }
-                                            x+=(Integer) toMandate.get(0);
-                                            Months = String.valueOf(x);
-                                        }
-                                        lore.add(Utils.chat(toNameOfes.get(1)+"/"+Madante+"$ "+Months+"m"));
-                                    }
-                                    else
-                                    {
-                                        if((Integer) toMonths.get(1)>0)
-                                        {
-                                            for(int ii = 2; ii<=entry.getValue().get(p.getName())/Main.plugin.getConfig().getInt("IllegalSubstances.above"); ii++)
-                                            {
-                                                x+= (Integer) additionalMonths.get(1);
-                                            }
-                                            x+=(Integer) toMonths.get(1);
-                                            Months = String.valueOf(x);
-                                        }
-                                        if((Integer) toMandate.get(1)>0)
-                                        {
-                                            x =0;
-                                            for(int ii = 2; ii<=entry.getValue().get(p.getName())/Main.plugin.getConfig().getInt("IllegalSubstances.above"); ii++)
-                                            {
-                                                x+= (Integer) additionalMandate.get(1);
-                                            }
-                                            x+=(Integer) toMandate.get(1);
-                                            Months = String.valueOf(x);
-                                        }
-                                        lore.add(Utils.chat(toNameOfes.get(1)+"/"+Madante+"$ "+Months+"m"));
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            lore.add(Utils.chat(entry.getKey() + "/" +mandateM.get(p.getName()) * Integer.parseInt(String.valueOf(entry.getValue().get(p.getName())))+"$ "+ monthsM.get(p.getName()) * Integer.parseInt(String.valueOf(entry.getValue().get(p.getName())))+"m "));
-                        }
+                        lore.add(entry.getValue().get(p.getName()));
                     }
                 }
             }
