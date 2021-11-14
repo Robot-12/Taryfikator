@@ -48,7 +48,13 @@ public class Main extends JavaPlugin implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if(label.equalsIgnoreCase("test"))
+        if(label.equalsIgnoreCase("tary"))
+        {
+            if(args.length > 0){
+                return false;
+            }
+        }
+        if(label.equalsIgnoreCase("taryfikator"))
         {
             if(args.length > 0){
                 return false;

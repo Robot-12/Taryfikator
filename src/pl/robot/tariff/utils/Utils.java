@@ -136,7 +136,7 @@ public class Utils {
         ItemMeta meta = (ItemMeta) item.getItemMeta();
         if(Integer.parseInt(mandateS)>0||Integer.parseInt(monthsS)>0)
         {
-            meta.setDisplayName(Utils.chat("Pszewinienia: "));
+            meta.setDisplayName(Utils.chat("Przewinienia: "));
             if(Integer.parseInt(mandateS)>0)
             {
                 lore.add(Utils.chat("Mandat: "+mandateS));
@@ -157,7 +157,7 @@ public class Utils {
         }
         else
         {
-            meta.setDisplayName(Utils.chat("Brak Wybranych pszewinień"));
+            meta.setDisplayName(Utils.chat("Brak Wybranych Przewinień"));
         }
         for (String s : loreString) {
             lore.add(Utils.chat(s));

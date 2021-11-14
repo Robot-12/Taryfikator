@@ -145,7 +145,7 @@ public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv)
         case "Restart":
             ItemMeta itemMeta = inv.getItem(40).getItemMeta();
 
-            itemMeta.setDisplayName("Brak Wybranych pszewinień");
+            itemMeta.setDisplayName("Brak Wybranych przewinień");
             itemMeta.setLore(Collections.singletonList(" "));
             inv.getItem(40).setItemMeta(itemMeta);
             for (Map.Entry<String, Map<String, Integer>> entry : ListUI.list.entrySet()) {
@@ -207,7 +207,6 @@ public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv)
             }
             break;
         default:
-            p.sendMessage("Kliknełes coś co nie zostało doane jeszczsze");
     }
 }
 }

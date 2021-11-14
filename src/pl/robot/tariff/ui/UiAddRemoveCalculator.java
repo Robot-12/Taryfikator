@@ -105,7 +105,6 @@ public class UiAddRemoveCalculator {
             p.openInventory(CalculatorUI.GUI(p));
             break;
         default:
-            p.sendMessage("Kliknełes coś co nie zostało doane jeszczsze");
     }
 }
 

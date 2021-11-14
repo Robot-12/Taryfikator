@@ -2,11 +2,15 @@ main: pl.robot.tariff.Main
 name: Tariff
 version: 1.0
 author: Robot
-description: ucze się
+description: taryfikator
 api-version: 1.12.2
 
 commands:
-  test:
-    description: "Moja piersza komeda"
-    aliases: [pk]
+  taryfikator:
+    description: "To taryfikator"
+    aliases: [taryfikator]
+    usage: "Nie poawnie użyłeś komendy"
+  tary:
+    description: "To taryfikator"
+    aliases: [tary]
     usage: "Nie poawnie użyłeś komendy"
