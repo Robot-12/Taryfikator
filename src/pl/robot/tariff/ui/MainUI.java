@@ -8,27 +8,25 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import pl.robot.tariff.Main;
-import pl.robot.tariff.calculator.CalculatorUI;
 import pl.robot.tariff.utils.Utils;
-import pl.robot.tariff.uiList.ListUI;
 
 import java.util.*;
 
-public class TestUI {
+public class MainUI {
 
     public static Inventory inv;
-    public static String inventory_name;
+    public static String InventoryName;
     public static int inv_rows = 9*9;
 
     public static void inttialize(){
-    inventory_name = Utils.chat("&c&lTaryfikator ");
+    InventoryName = Utils.chat("&c&lTaryfikator ");
 
     inv = Bukkit.createInventory(null, inv_rows);
 }
 
 public static Inventory GUI (Player p){
 
-    Inventory toReturn = Bukkit.createInventory(null, inv_rows,inventory_name);
+    Inventory toReturn = Bukkit.createInventory(null, inv_rows, InventoryName);
     String mandate = "0";
     String months = "0";
     Map<String, Integer> madateM = new HashMap<String, Integer>();
@@ -65,9 +63,9 @@ public static Inventory GUI (Player p){
     Utils.createItemByte(inv, 160,10,1,  75, "&39.Maski", "","");
     Utils.createItemByte(inv, 160,10,1,  79, "&310.Inne", "","");
 
-    Utils.createItem(inv, 426,1,  23,"Miesionce/Pieniodze", "");
+    Utils.createItem(inv, 426,1,  23,"Miesiące/Pieniądze", "");
     Utils.createItemStats(inv, 340,1,  41,months,mandate,monthsM,madateM,p,"");
-    Utils.createItemMeta(inv, 386,1,  59,"Pokasz Wynik", mandate+","+months,"");
+    Utils.createItemMeta(inv, 386,1,  59,"Pokaż wynik", mandate+","+months,"");
     Utils.createItemByte(inv, 160,14,1,  77,"&cRestart", "");
 
 
@@ -84,13 +82,13 @@ public static void ListOffenses(String OffensesName,Player p)
     }
     if(sizelist > 0)
     {
-        for (int i = 1;i <=sizelist;i++)
+        for (int i = 1;i <sizelist;i++)
         {
             if(sizelist<=i*3)
             {
                     ListUI.inv_rows = ((i+i-1)*9);
                     ListUI.inttialize();
-                    ListUI.inventory_name = Utils.chat("&c&l"+Main.plugin.getConfig().getString(OffensesName+".name"));
+                    ListUI.InventoryName = Utils.chat("&c&l"+Main.plugin.getConfig().getString(OffensesName+".name"));
                     p.closeInventory();
                     p.openInventory(ListUI.GUI(p,OffensesName));
                     break;
@@ -104,7 +102,8 @@ public static void ListOffenses(String OffensesName,Player p)
     return;
 }
 
-public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv){
+public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv)
+{
     String name = clicked.getItemMeta().getDisplayName();
     switch (ChatColor.stripColor(name))
     {
@@ -138,7 +137,8 @@ public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv)
         case "10.Inne":
             ListOffenses("Another",p);
             break;
-        case "Miesionce/Pieniodze":
+        case "Miesiące/Pieniądze":
+            CalculatorUI.initialize();
             p.closeInventory();
             p.openInventory(CalculatorUI.GUI(p));
             break;
@@ -173,7 +173,7 @@ public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv)
                 }
             }
             break;
-        case "Pokasz Wynik":
+        case "Pokaż wynik":
             ArrayList<String> array = new ArrayList<String>(Arrays.asList(clicked.getItemMeta().getLocalizedName().split(",")));
             for(Entity en : p.getWorld().getEntities()) {
                 if(en instanceof Player) {
@@ -202,21 +202,12 @@ public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv)
                                     player.sendMessage(Utils.chat("&5(("+p.getName()+"))"));
                                 }
                             }
-//                        for(int i = 0;i<inv.getItem(40).getItemMeta().getLore().size()-1;i++)
-//                        {
-//                            player.sendMessage(Utils.chat("&5"+String.valueOf(inv.getItem(40).getItemMeta().getLore().get(i))));
-//                        }
                     }
                 }
             }
             break;
         default:
-
             p.sendMessage("Kliknełes coś co nie zostało doane jeszczsze");
     }
-//    if(clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&3Inne"))){
-//        p.setDisplayName(Utils.chat("&8 [&6*&8] &6&1You have successfullyn namme a GUI!"));
-//
-//    }
 }
 }

@@ -6,11 +6,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import pl.robot.tariff.calculator.CalculatorUI;
-import pl.robot.tariff.listeners.InventoryClickLisyner;
-import pl.robot.tariff.ui.TestUI;
-import pl.robot.tariff.uiAddRemove.AddRemoveUI;
-import pl.robot.tariff.uiAddRemoveCalculator.UiAddRemoveCalculator;
+import pl.robot.tariff.ui.CalculatorUI;
+import pl.robot.tariff.listeners.InventoryClickListener;
+import pl.robot.tariff.ui.MainUI;
+import pl.robot.tariff.ui.AddRemoveUI;
+import pl.robot.tariff.ui.UiAddRemoveCalculator;
 
 import java.util.logging.Logger;
 
@@ -22,11 +22,10 @@ public class Main extends JavaPlugin implements CommandExecutor {
     @Override
     public void onEnable() {
         super.onEnable();
-        new InventoryClickLisyner(this);
-        TestUI.inttialize();
+        new InventoryClickListener(this);
+        MainUI.inttialize();
         AddRemoveUI.inttialize();
-        CalculatorUI.inttialize();
-        UiAddRemoveCalculator.inttialize();
+        UiAddRemoveCalculator.initialize();
         config.options().copyDefaults(true);
         saveConfig();
         plugin = this;
@@ -55,7 +54,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
                 return false;
             }
         }
-        player.openInventory(TestUI.GUI(player));
+        player.openInventory(MainUI.GUI(player));
         return true;
     }
 

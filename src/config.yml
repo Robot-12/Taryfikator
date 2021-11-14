@@ -66,3 +66,6 @@ IllegalSubstances:
   months: [ 5,10,15 ]
   mandate: [ 1000,1000,2000 ]
   nameOffense: ["6.7 Dystrybucja nielegalnych substancji","6.8 Produkcja narkotyków lekkich","6.9 Produkcja narkotyków ciękich"]
+
+Exchange:
+  Valiu: 100

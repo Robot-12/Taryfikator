@@ -11,8 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import pl.robot.tariff.Main;
-import pl.robot.tariff.uiList.ListUI;
+import pl.robot.tariff.ui.ListUI;
 
 import static java.lang.Integer.parseInt;
 

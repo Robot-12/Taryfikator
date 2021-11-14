@@ -1,26 +1,19 @@
-package pl.robot.tariff.uiList;
+package pl.robot.tariff.ui;
 
-import net.minecraft.server.v1_12_R1.BlockPosition;
-import net.minecraft.server.v1_12_R1.PacketPlayOutOpenSignEditor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.block.Block;
-import org.bukkit.block.Sign;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import pl.robot.tariff.Main;
-import pl.robot.tariff.ui.TestUI;
-import pl.robot.tariff.uiAddRemove.AddRemoveUI;
 import pl.robot.tariff.utils.Utils;
 
 import java.util.*;
 
-public class ListUI  {
+public class ListUI {
 
     public static Inventory inv;
-    public static String inventory_name;
+    public static String InventoryName = "";
     public static int inv_rows = 1*9;
     public static Map<String, Map<String, Integer>> list= new HashMap<String, Map<String, Integer>>();
     public static Map<String, Map<String, Integer>> listMonths= new HashMap<String, Map<String, Integer>>();
@@ -34,7 +27,7 @@ public class ListUI  {
     }
 
     public static Inventory GUI (Player p,String OffensesName){
-        Inventory toReturn = Bukkit.createInventory(null, inv_rows,inventory_name);
+        Inventory toReturn = Bukkit.createInventory(null, inv_rows, InventoryName);
         List<String> nameOfset = (List<String>) Main.plugin.getConfig().getList(OffensesName+".nameOffense");
         List<String> months = (List<String>) Main.plugin.getConfig().getList(OffensesName+".months");
         List<String> mandate = (List<String>) Main.plugin.getConfig().getList(OffensesName+".mandate");
@@ -89,7 +82,7 @@ public class ListUI  {
     public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv) throws NoSuchMethodException {
         if(clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&cPowrót"))){
             p.closeInventory();
-            p.openInventory(TestUI.GUI(p));
+            p.openInventory(MainUI.GUI(p));
             return;
         }
         String name = clicked.getItemMeta().getDisplayName();
@@ -163,7 +156,7 @@ public class ListUI  {
 //            ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
 //
 //        }
-        for(int i = 0;i <=nameOfset.size();i++)
+        for(int i = 0;i <nameOfset.size();i++)
         {
             String name0 = (String) nameOfset.get(i);
             if(name0 == ChatColor.stripColor(name))

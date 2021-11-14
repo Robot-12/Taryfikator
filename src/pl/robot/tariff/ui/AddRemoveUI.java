@@ -1,24 +1,22 @@
-package pl.robot.tariff.uiAddRemove;
+package pl.robot.tariff.ui;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemFactory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import pl.robot.tariff.Main;
-import pl.robot.tariff.uiList.ListUI;
 import pl.robot.tariff.utils.Utils;
 
 import java.util.*;
 
 import static java.lang.Integer.parseInt;
 
-public class AddRemoveUI  {
+public class AddRemoveUI {
 
     public static Inventory inv;
-    public static String inventory_name ="Test";
+    public static String InventoryName ="Test";
     public static String metaName ="Test";
     public static int inv_rows = 4*9;
 
@@ -33,7 +31,7 @@ public class AddRemoveUI  {
         List<?> nameOfset = Main.plugin.getConfig().getList(OffensesName+".nameOffense");
         List<?> months = Main.plugin.getConfig().getList(OffensesName+".months");
         List<?> mandate = Main.plugin.getConfig().getList(OffensesName+".mandate");
-        inventory_name = Main.plugin.getConfig().getString(OffensesName+".name");
+        InventoryName = Main.plugin.getConfig().getString(OffensesName+".name");
         int map = 0;
         String monthsMeta = "0";
         String mandateMeta = "0";
@@ -66,7 +64,7 @@ public class AddRemoveUI  {
                 {
                     String displayName = (String) nameOfset.get(i-1);
                     List<String> ary = new ArrayList<String>(Arrays.asList(displayName.split("<br>")));
-                    inventory_name = Utils.chat("&3"+ary.get(0)+"...");
+                    InventoryName = Utils.chat("&3"+ary.get(0)+"...");
                     metaName = ary.get(0);
                     monthsMeta = String.valueOf(months.get(i-1));
                     mandateMeta = String.valueOf(mandate.get(i-1));
@@ -139,7 +137,7 @@ public class AddRemoveUI  {
                     {
                         if((Integer) toMonths.get(0)>0||(Integer) additionalMonths.get(0)>0)
                         {
-                            for(int i = 2; i<=map/Main.plugin.getConfig().getInt(OffensesName+".above"); i++)
+                            for(int i = 2; i<map/Main.plugin.getConfig().getInt(OffensesName+".above"); i++)
                             {
                                 x+= (Integer) additionalMonths.get(0);
                             }
@@ -150,7 +148,7 @@ public class AddRemoveUI  {
                         if((Integer) toMandate.get(0)>0||(Integer) additionalMandate.get(0)>0)
                         {
                             x =0;
-                            for(int i = 2; i<=map/Main.plugin.getConfig().getInt(OffensesName+".above"); i++)
+                            for(int i = 2; i<map/Main.plugin.getConfig().getInt(OffensesName+".above"); i++)
                             {
                                 x+= (Integer) additionalMandate.get(0);
                             }
@@ -163,7 +161,7 @@ public class AddRemoveUI  {
                     {
                         if((Integer) toMonths.get(1)>0)
                         {
-                            for(int i = 2; i<=map/Main.plugin.getConfig().getInt(OffensesName+".above"); i++)
+                            for(int i = 2; i<map/Main.plugin.getConfig().getInt(OffensesName+".above"); i++)
                             {
                                 x+= (Integer) additionalMonths.get(1);
                             }
@@ -174,7 +172,7 @@ public class AddRemoveUI  {
                         if((Integer) toMandate.get(1)>0)
                         {
                             x =0;
-                            for(int i = 2; i<=map/Main.plugin.getConfig().getInt(OffensesName+".above"); i++)
+                            for(int i = 2; i<map/Main.plugin.getConfig().getInt(OffensesName+".above"); i++)
                             {
                                 x+= (Integer) additionalMandate.get(1);
                             }
@@ -185,9 +183,9 @@ public class AddRemoveUI  {
                     }
                 }
             }
-            inventory_name = Utils.chat("&3"+nameItem);
+            InventoryName = Utils.chat("&3"+nameItem);
         }
-        Inventory toReturn = Bukkit.createInventory(null, inv_rows,inventory_name);
+        Inventory toReturn = Bukkit.createInventory(null, inv_rows, InventoryName);
         Utils.createItemByteMeta(inv, 160,14,1,  10,"&c&l-1", monthsMeta+","+mandateMeta,"");
         Utils.createItemByteMeta(inv, 160,14,1,  11,"&c&l-5", monthsMeta+","+mandateMeta,"");
         Utils.createItemByteMeta(inv, 160,14,1,  12,"&c&l-10", monthsMeta+","+mandateMeta,"");
@@ -272,7 +270,7 @@ public class AddRemoveUI  {
                         {
                             if((Integer) toMonths.get(0)>0||(Integer) additionalMonths.get(0)>0)
                             {
-                                for(int ii = 2; ii<=Valiu/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                for(int ii = 2; ii<Valiu/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
                                 {
                                     x+= (Integer) additionalMonths.get(0);
                                 }
@@ -282,7 +280,7 @@ public class AddRemoveUI  {
                             if((Integer) toMandate.get(0)>0||(Integer) additionalMandate.get(0)>0)
                             {
                                 x =0;
-                                for(int ii = 2; ii<=Valiu/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                for(int ii = 2; ii<Valiu/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
                                 {
                                     x+= (Integer) additionalMandate.get(0);
                                 }
@@ -294,7 +292,7 @@ public class AddRemoveUI  {
                         {
                             if((Integer) toMonths.get(1)>0)
                             {
-                                for(int ii = 2; ii<=Valiu/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                for(int ii = 2; ii<Valiu/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
                                 {
                                     x+= (Integer) additionalMonths.get(1);
                                 }
@@ -304,7 +302,7 @@ public class AddRemoveUI  {
                             if((Integer) toMandate.get(1)>0)
                             {
                                 x =0;
-                                for(int ii = 2; ii<=Valiu/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                for(int ii = 2; ii<Valiu/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
                                 {
                                     x+= (Integer) additionalMandate.get(1);
                                 }
@@ -427,7 +425,7 @@ public class AddRemoveUI  {
                                 {
                                     if((Integer) toMonths.get(0)>0||(Integer) additionalMonths.get(0)>0)
                                     {
-                                        for(int ii = 2; ii<=Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                        for(int ii = 2; ii<Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
                                         {
                                             x+= (Integer) additionalMonths.get(0);
                                         }
@@ -438,7 +436,7 @@ public class AddRemoveUI  {
                                     if((Integer) toMandate.get(0)>0||(Integer) additionalMandate.get(0)>0)
                                     {
                                         x =0;
-                                        for(int ii = 2; ii<=Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                        for(int ii = 2; ii<Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
                                         {
                                             x+= (Integer) additionalMandate.get(0);
                                         }
@@ -459,7 +457,7 @@ public class AddRemoveUI  {
                                 {
                                     if((Integer) toMonths.get(1)>0)
                                     {
-                                        for(int ii = 2; ii<=Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                        for(int ii = 2; ii<Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
                                         {
                                             x+= (Integer) additionalMonths.get(1);
                                         }
@@ -470,7 +468,7 @@ public class AddRemoveUI  {
                                     if((Integer) toMandate.get(1)>0)
                                     {
                                         x =0;
-                                        for(int ii = 2; ii<=Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
+                                        for(int ii = 2; ii<Integer.valueOf(ChatColor.stripColor(inv.getItem(13).getItemMeta().getDisplayName()))/Main.plugin.getConfig().getInt(OffensesName+".above"); ii++)
                                         {
                                             x+= (Integer) additionalMandate.get(1);
                                         }
